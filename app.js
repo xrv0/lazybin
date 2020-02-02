@@ -2,22 +2,29 @@ const http = require("http");
 const fs = require("fs");
 const render = require("./render")
 const port = 3000;
+const index = fs.readFileSync('./template/index.html');
 
 const server = http.createServer(function(req, res) {
-	res.writeHead(200, {"Content-Type": "text/html"});
+	var url = req.url;
 
-	if(req.url == "/") {
-		//Serve homepage
-	}else {
-		var id = req.url.slice(1)
+	if(url == "/") {
+		render.renderHomepage(res);
+	}else if(url.startsWith("/raw/")) {
+		var id = url.slice(5)
 		fs.readFile("./pastes/" + id + ".paste", function(error, data) {
 			if(error) {
-				res.writeHead(404)
-				res.write("This paste does not exist!")
-				res.end()
+				render.renderPasteMissingRaw(res)
+			}else {
+				render.renderPasteRaw(id, data, res)
+			}
+		})
+	}else {
+		var id = url.slice(1)
+		fs.readFile("./pastes/" + id + ".paste", function(error, data) {
+			if(error) {
+				render.renderPasteMissing(res)
 			}else {
 				render.renderPaste(id, data, res)
-				res.end()
 			}
 		})
 	}
