@@ -2,7 +2,6 @@ const http = require("http");
 const fs = require("fs");
 const render = require("./render")
 const port = 3000;
-const index = fs.readFileSync('./template/index.html');
 
 const server = http.createServer(function(req, res) {
 	var url = req.url;

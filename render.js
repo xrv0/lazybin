@@ -1,7 +1,4 @@
 const fs = require("fs");
-const pasteMissing = fs.readFileSync("./template/pasteMissing.html")
-const index = fs.readFileSync('./template/index.html');
-
 const cachedStaticFiles = {}
 const staticDir = "./static/"
 
@@ -13,8 +10,7 @@ function renderPaste(id, content, res) {
 }
 
 function renderPasteMissing(res) {
-    res.writeHead(404, {"Content-Type": "text/html"});
-    res.end(pasteMissing);
+    serveStaticFile("pasteMissing.html", res)
 }
 
 function renderPasteMissingRaw(res) {
@@ -28,12 +24,12 @@ function renderPasteRaw(id, content, res) {
 }
 
 function renderHomepage(res) {
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    res.end(index);
+    serveStaticFile("index.html", res)
 }
 
 function serveStaticFile(path, res) {
     path = staticDir + path;
+    console.log(path)
     if(cachedStaticFiles[path]) {
         content = cachedStaticFiles[path];
     }else if(fs.existsSync(path)){
