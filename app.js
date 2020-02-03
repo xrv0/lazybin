@@ -9,6 +9,8 @@ const server = http.createServer(function(req, res) {
 
 	if(url == "/") {
 		render.renderHomepage(res);
+	}else if(url.startsWith("/static/")) {
+		render.serveStaticFile(url.slice(8), res)
 	}else if(url.startsWith("/raw/")) {
 		var id = url.slice(5)
 		fs.readFile("./pastes/" + id + ".paste", function(error, data) {

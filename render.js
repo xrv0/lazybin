@@ -2,31 +2,58 @@ const fs = require("fs");
 const pasteMissing = fs.readFileSync("./template/pasteMissing.html")
 const index = fs.readFileSync('./template/index.html');
 
+const cachedStaticFiles = {}
+const staticDir = "./static/"
+
 function renderPaste(id, content, res) {
     res.writeHead(200, {"Content-Type": "text/html"});
-    var fileContent = fs.readFileSync("./template/paste.html", "utf8").toString();
+    var fileContent = fs.readFileSync("./template/paste.html", "utf8");
     fileContent = fileContent.replace("$content", content).replace("$id", id);
-    res.write(fileContent, function(err) { res.end(); });
+    res.end(fileContent);
 }
 
 function renderPasteMissing(res) {
     res.writeHead(404, {"Content-Type": "text/html"});
-    res.write(pasteMissing, function(err) { res.end(); });
+    res.end(pasteMissing);
 }
 
 function renderPasteMissingRaw(res) {
     res.writeHead(404, {"Content-Type": "text/plain"});
-    res.write("this paste does not exist!", function(err) { res.end(); });
+    res.end("this paste does not exist!");
 }
 
 function renderPasteRaw(id, content, res) {
     res.writeHead(200, {"Content-Type": "text/plain"});
-    res.write(content, function(err) { res.end(); });
+    res.end(content);
 }
 
 function renderHomepage(res) {
     res.writeHead(200, {'Content-Type': 'text/html'});
-    res.write(index, function(err) { res.end(); });
+    res.end(index);
+}
+
+function serveStaticFile(path, res) {
+    path = staticDir + path;
+    if(cachedStaticFiles[path]) {
+        content = cachedStaticFiles[path];
+    }else if(fs.existsSync(path)){
+        content = fs.readFileSync(path, "utf8");
+        cachedStaticFiles[path] = content;
+    }else {
+        res.writeHead(404, {"Content-Type": "text/plain"});
+        res.end("Content could not be found!");
+        return;
+    }
+
+    var contentType = "text/plain";
+    if(path.endsWith(".js")) {
+        contentType = "text/javascript";
+    }else if(path.endsWith(".html")) {
+        contentType = "text/html"
+    }
+
+    res.writeHead(200, {"Content-Type": contentType});
+    res.end(content)
 }
 
 module.exports.renderPaste = renderPaste;
@@ -34,3 +61,4 @@ module.exports.renderPasteMissing = renderPasteMissing;
 module.exports.renderPasteMissingRaw = renderPasteMissingRaw;
 module.exports.renderPasteRaw = renderPasteRaw;
 module.exports.renderHomepage = renderHomepage;
+module.exports.serveStaticFile = serveStaticFile;
