@@ -1,3 +1,1 @@
-while(true) {
-    console.log("test")
-}
+alert("test")
