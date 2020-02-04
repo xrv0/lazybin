@@ -1,40 +1,44 @@
-const http = require("http");
+const express = require("express");
+const bodyParser = require('body-parser')
 const fs = require("fs");
-const render = require("./render")
-const port = 3000;
 
-const server = http.createServer(function(req, res) {
-	var url = req.url;
+var app = express();
 
-	if(url == "/") {
-		render.renderHomepage(res);
-	}else if(url.startsWith("/static/")) {
-		render.serveStaticFile(url.slice(8), res)
-	}else if(url.startsWith("/raw/")) {
-		var id = url.slice(5)
-		fs.readFile("./pastes/" + id + ".paste", function(error, data) {
-			if(error) {
-				render.renderPasteMissingRaw(res)
-			}else {
-				render.renderPasteRaw(id, data, res)
-			}
-		})
-	}else {
-		var id = url.slice(1)
-		fs.readFile("./pastes/" + id + ".paste", function(error, data) {
-			if(error) {
-				render.renderPasteMissing(res)
-			}else {
-				render.renderPaste(id, data, res)
-			}
-		})
-	}
-})
+app.use(bodyParser.urlencoded({extended: true })); 
+app.use(express.static('public'));
 
-server.listen(port, function(error) {
-	if(error) {
-		console.log("Something went wrong", error)	
-	}else {
-		console.log("Server successfully started and now listening on " + port)
-	}
-})
+app.post("/paste_publish", function(req, res) {
+    content = req.body.paste_content;
+    var id = generateUID(6);
+    fs.appendFile('./pastes/' + id + ".paste", content, function (err) {
+        if (err) throw err;
+        console.log('File is created successfully.');
+        res.writeHead(302, {"Location" : "/p/" + id});
+        res.end();
+    });
+});
+
+app.get("/p/*", function(req, res) {
+    var id = req.url.slice(3);
+    fs.readFile("./pastes/" + id + ".paste", function(error, content) {
+        if(error) {
+            res.send("this paste does not exist" + error)
+        }else {
+            res.end(content);
+        }
+    })
+});
+
+app.listen(3000, function () {
+    console.log('Example app listening on port 3000!');
+});
+
+function generateUID(length) {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+       result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
