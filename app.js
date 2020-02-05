@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require('body-parser')
 const fs = require("fs");
 
+const port = 3000;
 var app = express();
 
 app.use(bodyParser.urlencoded({extended: true })); 
@@ -29,16 +30,15 @@ app.get("/p/*", function(req, res) {
     })
 });
 
-app.listen(3000, function () {
-    console.log('Example app listening on port 3000!');
-});
-
+const UIDCharacters = 'abcdefghijklmnopqrstuvwxyz';
 function generateUID(length) {
     var result = '';
-    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
-       result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    for (var i = 0; i < length; i++ ) {
+       result += UIDCharacters.charAt(Math.floor(Math.random() * UIDCharacters.length));
     }
     return result;
 }
+
+app.listen(port, function () {
+    console.log('lazybin now listening for incoming requests on 0.0.0.0:' + port);
+});
