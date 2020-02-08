@@ -9,11 +9,9 @@
   </a>
 </p>
 
-> pastebin but for lazy people
+> pastebin but for lazy people (-, - )…zzzZZZ
 
-### 🏠 [Homepage](lazyb.in)
-
-### ✨ [Demo](lazyb.in)
+### 🏠 [Homepage / Demo](lazyb.in)
 
 ## Author
 
@@ -31,6 +29,7 @@ Contributions, issues and feature requests are welcome!<br />Feel free to check 
 Give a ⭐️ if this project helped you!
 
 Donate Bitcoin: 1FVGKsksRt5DJ87tj1v3UEDivPphLze7Ea
+
 Donate Ether: 0xC3cF8CDb45C03557a1ade85a41657cddB2A5Fc21
 ## 📝 License
 
