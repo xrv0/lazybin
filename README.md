@@ -13,6 +13,11 @@
 
 ### 🏠 [Homepage / Demo](lazyb.in)
 
+## How it works
+Before the content of the paste is sent to the server it is encrypted using AES with a randomly generated key using the sjcl.js[https://crypto.stanford.edu/sjcl/] library.
+The url can then be sent to other people with the key included after the hash in the URI. The content is then decrypted again clientside in the readers browser.
+
+This leads to the server not having direct access to the unencrypted content of the paste at any time.  
 ## Author
 
 👤 **xrv0**
