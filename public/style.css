@@ -1,4 +1,4 @@
-#menu {
+div#menu {
     border: 1px solid black;
     background-color: grey;
     position: fixed;
@@ -8,7 +8,7 @@
     margin-left: 10px;
 }
 
-#paste_content {
+textarea#paste_content {
     resize: none;
     width: calc(100% - 150px);
 }

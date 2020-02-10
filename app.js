@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const fs = require("fs");
 
 const port = 3000;
-var app = express();
+const app = express();
 
 app.use(bodyParser.urlencoded({extended: true })); 
 app.use(express.static(__dirname + '/public'));
@@ -12,13 +12,15 @@ app.use(express.static(__dirname + '/public'));
 Handles post requests for saving pastes
 */
 app.post("/paste_publish", function(req, res) {
-    content = req.body.paste_content;
-    var file;
-    var id;
+    let content = req.body.paste_content;
+    let file;
+    let id;
+
     while(!file || fs.existsSync(file)) {
         id = generateUID(6);
         file = './pastes/' + id + ".paste"
     }
+
     fs.appendFile(file, content, function (err) {
         if (err) {
             console.log("An error occured while creating/writing to paste file", err, file, content);
@@ -36,13 +38,15 @@ app.post("/paste_publish", function(req, res) {
 Inserts the text into the paste template
 */
 app.get("/p/*", function(req, res) {
-    var id = req.url.slice(3);
-    fs.readFile("./pastes/" + id + ".paste", function(error, content) {
+    const id = req.url.slice(3);
+    fs.readFile("./pastes/" + id + ".paste", function(error, pasteContent) {
         if(error) {
             console.log(error);
             res.send("this paste does not seem to exist")
         }else {
-            res.end(content);
+            fs.readFile("./template/paste.html", function (error, content) {
+                res.send(content.toString().replace("$id", id).replace("$content", pasteContent.toString()))
+            })
         }
     })
 });
@@ -51,7 +55,7 @@ app.get("/p/*", function(req, res) {
 Returns the raw text
 */
 app.get("/raw/*", function(req, res) {
-    var id = req.url.slice(5);
+    const id = req.url.slice(5);
     fs.readFile("./pastes/" + id + ".paste", function(error, content) {
         if(error) {
             res.send("this paste does not exist" + error)
@@ -62,15 +66,20 @@ app.get("/raw/*", function(req, res) {
 });
 
 /*
-Generates u
+Generates ID
 */
 const UIDCharacters = 'abcdefghijklmnopqrstuvwxyz';
-function generateUID(length) {
-    var result = '';
-    for (var i = 0; i < length; i++ ) {
-       result += UIDCharacters.charAt(Math.floor(Math.random() * UIDCharacters.length));
+
+function generateString(length, characters) {
+    let result = '';
+    for (let i = 0; i < length; i++ ) {
+       result += characters.charAt(Math.floor(Math.random() * characters.length));
     }
     return result;
+}
+
+function generateUID(length) {
+    return generateString(length, UIDCharacters);
 }
 
 app.listen(port, function () {
