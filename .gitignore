@@ -3,3 +3,4 @@ pastes/*
 pastes/
 *.xml
 *.iml
+*.code-workspace
