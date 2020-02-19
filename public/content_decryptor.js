@@ -8,6 +8,11 @@ if(!key) {
     document.location.hash = key;
 }
 
-console.log(key, content.textContent);
-decryptedContent = sjcl.decrypt(key, content.textContent);
-content.textContent = decryptedContent;
+if(key) {
+    console.log(key, content.textContent);
+    decryptedContent = sjcl.decrypt(key, content.textContent);
+    content.textContent = decryptedContent;
+}else {
+    content.textContent = "Decryption failed. Key missing";
+}
+
