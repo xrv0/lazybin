@@ -10,5 +10,5 @@ div#menu {
 
 textarea#paste_content {
     resize: none;
-    width: calc(100% - 150px);
+    width: 80%;
 }

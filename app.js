@@ -68,23 +68,6 @@ app.get("/raw/*", function(req, res) {
     })
 });
 
-/*
-Generates ID
-*/
-const UIDCharacters = 'abcdefghijklmnopqrstuvwxyz';
-
-function generateString(length, characters) {
-    let result = '';
-    for (let i = 0; i < length; i++ ) {
-       result += characters.charAt(Math.floor(Math.random() * characters.length));
-    }
-    return result;
-}
-
-function generateUID(length) {
-    return generateString(length, UIDCharacters);
-}
-
 app.listen(port, function () {
     console.log('lazybin now listening for incoming requests on 0.0.0.0:' + port);
 });
