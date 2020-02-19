@@ -17,13 +17,6 @@ app.post("/paste_publish", function(req, res) {
     let id = req.body.paste_content.split("%")[0];
     let file = "./pastes/" + id + ".paste";
 
-    if(!file || fs.existsSync(file)) {
-        console.log("An error occured while creating/writing to paste file (id already exists)", file, content);
-        res.writeHead(500, {"Content-Type" : "text/plain"});
-        res.end("An unexpected server error occured while saving your paste. Sorry ¯\_(ツ)_/¯ (id already exists)")
-        return;
-    }
-
     fs.appendFile(file, content, function (err) {
         if (err) {
             console.log("An error occured while creating/writing to paste file", err, file, content);
