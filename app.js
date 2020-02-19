@@ -16,17 +16,25 @@ app.post("/paste_publish", function(req, res) {
     let id = req.body.paste_content.split("%")[0];
     let file = "./pastes/" + id + ".paste";
 
-    fs.appendFile(file, content, function (err) {
-        if (err) {
-            console.log("An error occured while creating/writing to paste file", err, file, content);
-            res.writeHead(500, {"Content-Type" : "text/plain"});
-            res.end("An unexpected server error occured while saving your paste. Sorry ¯\_(ツ)_/¯")
+    fs.access(file, fs.constants.F_OK, (err => {
+        if(err) {
+            fs.appendFile(file, content, function (err) {
+                if (err) {
+                    console.log("An error occurred while creating/writing to paste file", err, file, content);
+                    res.writeHead(500, {"Content-Type" : "text/plain"});
+                    res.end("An unexpected server error occurred while saving your paste. Sorry ¯\_(ツ)_/¯")
+                }else {
+                    console.log("Paste " + id + " was created successfully. (at " + file + ")");
+                    res.writeHead(301, {"Location" : "/p/" + id});
+                    res.end();
+                }
+            });
         }else {
-            console.log("Paste " + id + " was created successfully. (at " + file + ")");
-            res.writeHead(301, {"Location" : "/p/" + id});
-            res.end();
+            console.log("An error occured while creating/writing to paste file (paste with same id already exists)", err, file, content);
+            res.writeHead(500, {"Content-Type" : "text/plain"});
+            res.end("An unexpected server error occurred while saving your paste. Sorry ¯\_(ツ)_/¯ (id already exists)")
         }
-    });
+    }))
 });
 
 /*
