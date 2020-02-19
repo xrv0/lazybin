@@ -9,7 +9,7 @@
   </a>
 </p>
 
-> pastebin but for lazy people (-, - )…zzzZZZ
+> encrypted pastebin for lazy people (-, - )…zzzZZZ
 
 ### 🏠 [Homepage / Demo](lazyb.in)
 
