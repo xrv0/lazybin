@@ -12,7 +12,6 @@ app.use(express.static(__dirname + '/public'));
 Handles post requests for saving pastes
 */
 app.post("/paste_publish", function(req, res) {
-    console.log(req.body);
     let content = req.body.paste_content.split("%")[1];
     let id = req.body.paste_content.split("%")[0];
     let file = "./pastes/" + id + ".paste";
