@@ -5,17 +5,26 @@ function ValidateTextarea() {
     const content = pasteTextarea.value;
     if(content.length > 0) {
         console.log("Generating AES Key...");
-        const key = generatePassword(30);
+        const key = generateKey(256);
         const encryptedContent = sjcl.encrypt(key, content);
-        pasteTextarea.value = encryptedContent;
-        console.log("encrypted with key: "+ key);
+        const id = makeID(5);
+        pasteTextarea.value = id + "%" + encryptedContent;
+        localStorage.setItem(id, key);
         pasteForm.submit();
     }
 }
 
-function generatePassword(length) {
-    return "test";
-    let buf = new Uint8Array(length);
-    window.crypto.getRandomValues(buf);
-    return btoa(String.fromCharCode.apply(null, buf));
+function generateKey(entropy) {
+    entropy = Math.ceil(entropy / 6) * 6; /* non-6-multiple produces same-length base64 */
+    let key = sjcl.bitArray.clamp(sjcl.random.randomWords(Math.ceil(entropy / 32), 0), entropy);
+    return sjcl.codec.base64.fromBits(key, 0).replace(/\=+$/, '').replace(/\//, '-');
+}
+
+function makeID(length) {
+    let result = '';
+    const characters = `abcdefghijklmnopqrstuvwxyz`;
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
 }

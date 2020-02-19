@@ -12,13 +12,16 @@ app.use(express.static(__dirname + '/public'));
 Handles post requests for saving pastes
 */
 app.post("/paste_publish", function(req, res) {
-    let content = req.body.paste_content;
-    let file;
-    let id;
+    console.log(req.body);
+    let content = req.body.paste_content.split("%")[1];
+    let id = req.body.paste_content.split("%")[0];
+    let file = "./pastes/" + id + ".paste";
 
-    while(!file || fs.existsSync(file)) {
-        id = generateUID(6);
-        file = './pastes/' + id + ".paste"
+    if(!file || fs.existsSync(file)) {
+        console.log("An error occured while creating/writing to paste file (id already exists)", file, content);
+        res.writeHead(500, {"Content-Type" : "text/plain"});
+        res.end("An unexpected server error occured while saving your paste. Sorry ¯\_(ツ)_/¯ (id already exists)")
+        return;
     }
 
     fs.appendFile(file, content, function (err) {
