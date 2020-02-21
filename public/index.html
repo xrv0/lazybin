@@ -15,16 +15,8 @@
         <h1>lazybin</h1>
         <button type="disabled" onclick="uploadPaste()">Publish</button>
         <button type="reset">New</button>
-        <p>Expiration Time:</p>
-        <select name="paste_expiration_time" id="paste_expiration_time">
-            <option value="5">5 Minutes</option>
-            <option value="15">15 Minutes</option>
-            <option value="60">1 Hour</option>
-            <option value="350">6 Hours</option>
-            <option value="350">6 Hours</option>
-            <option value="1440">24 Hours</option>
-            <option value="never">Never</option>
-        </select>
+        <p>Key entropy:</p>
+        <input type="number" name="Key entropy" id="key-entropy" value="128">
     </div>
     <script src="/main.js"></script>
 </form>
