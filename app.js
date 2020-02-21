@@ -48,7 +48,7 @@ app.get("/p/*", function(req, res) {
             res.send("this paste does not seem to exist")
         }else {
             fs.readFile("./template/paste.html", function (error, content) {
-                res.send(content.toString().replace("$id", id).replace("$content", pasteContent.toString()))
+                res.send(content.toString().replace("$id", id).replace("$paste_content", pasteContent.toString()))
             })
         }
     })
