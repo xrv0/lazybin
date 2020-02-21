@@ -1,0 +1,11 @@
+div#content {
+    border-style: solid;
+    border-color: #000e13;
+    padding: 5px;
+    font-family: monospace;
+    font-size: 13px;
+}
+
+body {
+    background-color: #002b36;
+}
