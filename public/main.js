@@ -1,13 +1,16 @@
 const pasteTextarea = document.getElementById("paste_content");
 const pasteForm = document.getElementById("paste_form");
+const idLength = 3;
 
 function uploadPaste() {
     const content = pasteTextarea.value;
+    const entropy = parseInt(document.getElementById("key-entropy").value);
+
     if(content.length > 0) {
         console.log("Generating AES Key...");
-        const key = generateKey(256);
+        const key = generateKey(entropy);
         const encryptedContent = sjcl.encrypt(key, content);
-        const id = makeID(5);
+        const id = makeID(idLength);
         pasteTextarea.value = id + "%" + encryptedContent;
         localStorage.setItem(id, key);
         pasteForm.submit();
@@ -28,7 +31,7 @@ Generates a pseudo random ID with given length
  */
 function makeID(length) {
     let result = "";
-    const characters = `abcdefghijklmnopqrstuvwxyz`;
+    const characters = `abcdefghijklmnopqrstuvwxyz123456789`;
     for (let i = 0; i < length; i++) {
         result += characters.charAt(Math.floor(Math.random() * characters.length));
     }
