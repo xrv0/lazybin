@@ -3,9 +3,9 @@ const bodyParser = require('body-parser')
 const fs = require("fs");
 const {Storage} = require('@google-cloud/storage');
 
-const port = 3000;
+const port = 8080;
 const idLength = 4;
-const CLOUD_BUCKET = "bucket-name";
+const CLOUD_BUCKET = "lazbin-pastes";
 
 const app = express();
 const storage = new Storage();
@@ -20,7 +20,7 @@ Handles post requests for saving pastes
 app.post("/paste_publish", function(req, res) {
     const id = generateID(idLength);
     let content = req.body.paste_content;
-    let file = "/tmp/" + id + ".paste";
+    let file = "/tmp/" + id;
 
     fs.access(file, fs.constants.F_OK, (err => {
         if(err) {
@@ -32,13 +32,14 @@ app.post("/paste_publish", function(req, res) {
                 }else {
                     console.log("Paste " + id + " was created successfully. (at " + file + ")");
                     res.writeHead(301, {"Location" : "/p/" + id});
-                    bucket.upload(file);
-                    res.end();
+                    bucket.upload(file, function() {
+                        res.end();
+                    });
                     setTimeout(function(){
                         fs.unlink(file, function(err) {
                             console.log("Deleted " + file + err);
                         });
-                    }, 1500);
+                    }, 1000);
                 }
             });
         }else {
@@ -54,7 +55,7 @@ Inserts the text into the paste template
 */
 app.get("/p/*", function(req, res) {
     const id = req.url.slice(3);
-    const gFile = bucket.file(id + ".paste");
+    const gFile = bucket.file(id);
 
     if(gFile.exists()) {
         pasteContent = Buffer.alloc(0);
