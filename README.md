@@ -11,7 +11,7 @@
 
 > encrypted pastebin for lazy people (-, - )…zzzZZZ
 
-### 🏠 [Homepage / Demo](lazyb.in)
+### 🏠 [Homepage / Demo](https://lazybin-269011.appspot.com)
 
 ## Author
 
