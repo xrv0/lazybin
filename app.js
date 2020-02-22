@@ -13,7 +13,7 @@ app.use(express.static(__dirname + '/public'));
 Handles post requests for saving pastes
 */
 app.post("/paste_publish", function(req, res) {
-    const id = makeID(idLength);
+    const id = generateID(idLength);
     let content = req.body.paste_content;
     let file = "./pastes/" + id;
 
@@ -58,7 +58,7 @@ app.get("/p/*", function(req, res) {
 /*
 Generates a pseudo random ID with given length
  */
-function makeID(length) {
+function generateID(length) {
     let result = "";
     const characters = `abcdefghijklmnopqrstuvwxyz123456789`;
     for (let i = 0; i < length; i++) {
