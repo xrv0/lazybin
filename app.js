@@ -15,7 +15,7 @@ Handles post requests for saving pastes
 app.post("/paste_publish", function(req, res) {
     const id = makeID(idLength);
     let content = req.body.paste_content;
-    let file = "./pastes/" + id + ".paste";
+    let file = "./pastes/" + id;
 
     fs.access(file, fs.constants.F_OK, (err => {
         if(err) {
@@ -43,7 +43,7 @@ Inserts the text into the paste template
 */
 app.get("/p/*", function(req, res) {
     const id = req.url.slice(3);
-    fs.readFile("./pastes/" + id + ".paste", function(error, pasteContent) {
+    fs.readFile("./pastes/" + id, function(error, pasteContent) {
         if(error) {
             console.log(error);
             res.send("this paste does not seem to exist")
