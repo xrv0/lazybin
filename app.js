@@ -4,6 +4,7 @@ const fs = require("fs");
 
 const port = 3000;
 const app = express();
+const idLength = 4;
 
 app.use(bodyParser.urlencoded({extended: true })); 
 app.use(express.static(__dirname + '/public'));
@@ -12,8 +13,8 @@ app.use(express.static(__dirname + '/public'));
 Handles post requests for saving pastes
 */
 app.post("/paste_publish", function(req, res) {
-    let content = req.body.paste_content.split("%")[1];
-    let id = req.body.paste_content.split("%")[0];
+    const id = makeID(idLength);
+    let content = req.body.paste_content;
     let file = "./pastes/" + id + ".paste";
 
     fs.access(file, fs.constants.F_OK, (err => {
@@ -67,6 +68,18 @@ app.get("/raw/*", function(req, res) {
         }
     })
 });
+
+/*
+Generates a pseudo random ID with given length
+ */
+function makeID(length) {
+    let result = "";
+    const characters = `abcdefghijklmnopqrstuvwxyz123456789`;
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+}
 
 app.listen(port, function () {
     console.log('lazybin now listening for incoming requests on 0.0.0.0:' + port);

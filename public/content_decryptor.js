@@ -1,10 +1,9 @@
 const content = document.getElementById("content");
-const id = document.documentURI.split("/")[document.documentURI.split("/").length - 1];
-
 let key = document.documentURI.split("#")[1];
 
 if(!key) {
-    key = localStorage.getItem(id);
+    key = localStorage.getItem("lastKey");
+    localStorage.removeItem("lastKey");
     document.location.hash = key;
 }
 
