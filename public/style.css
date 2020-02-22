@@ -12,4 +12,11 @@ div#menu {
 textarea#paste_content {
     resize: none;
     width: 80%;
+    background-color: #000e13;
+    color: white;
+    padding: 5px;
+}
+
+body {
+    background-color: #002b36;
 }
