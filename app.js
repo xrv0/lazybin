@@ -56,20 +56,6 @@ app.get("/p/*", function(req, res) {
 });
 
 /*
-Returns the raw text
-*/
-app.get("/raw/*", function(req, res) {
-    const id = req.url.slice(5);
-    fs.readFile("./pastes/" + id + ".paste", function(error, content) {
-        if(error) {
-            res.send("this paste does not exist" + error)
-        }else {
-            res.end(content);
-        }
-    })
-});
-
-/*
 Generates a pseudo random ID with given length
  */
 function makeID(length) {
