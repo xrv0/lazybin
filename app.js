@@ -5,6 +5,7 @@ const fs = require("fs");
 const port = 3000;
 const app = express();
 const idLength = 4;
+const pasteDir = __dirname + "/pastes";
 
 app.use(bodyParser.urlencoded({extended: true })); 
 app.use(express.static(__dirname + '/public'));
@@ -15,7 +16,7 @@ Handles post requests for saving pastes
 app.post("/paste_publish", function(req, res) {
     let id = generateID(idLength);
     let content = req.body.paste_content;
-    let file = "./pastes/" + id;
+    let file = pasteDir + id;
 
     fs.access(file, fs.constants.F_OK, (err => {
         if(err) {
@@ -34,7 +35,7 @@ app.post("/paste_publish", function(req, res) {
             while(fs.existsSync(file)) {
                 id = generateID(idLength);
                 content = req.body.paste_content;
-                file = "./pastes/" + id;
+                file = pasteDir + id;
             }
         }
     }));
