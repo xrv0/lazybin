@@ -20,38 +20,37 @@ Handles post requests for saving pastes
 app.post("/paste_publish", function(req, res) {
     let id = generateID(idLength);
     let content = req.body.paste_content;
-    let file = "/tmp/" + id;
+    let file = bucket.file(id);
 
-    while(true) {
-        fs.access(file, fs.constants.F_OK, (err => {
-            if(err) {
-                break;
-            }else {
+    file.exists(file, (exists => {
+        if(exists) {
+            while(file.existsSync(file)) {
                 id = generateID(idLength);
                 content = req.body.paste_content;
-                file = "./pastes/" + id;
+                file = bucket.file(id);
             }
-        }));
-    }
-
-    fs.appendFile(file, content, function (err) {
-        if (err) {
-            console.log("An error occurred while creating/writing to paste file", err, file, content);
-            res.writeHead(500, {"Content-Type" : "text/plain"});
-            res.end("An unexpected server error occurred while saving your paste.")
         }else {
-            console.log("Paste " + id + " was created successfully. (at " + file + ")");
-            res.writeHead(301, {"Location" : "/p/" + id});
-            bucket.upload(file, function() {
-                res.end();
+            fs.appendFile(file, content, function (err) {
+                if (err) {
+                    console.log("An error occurred while creating/writing to paste file", err, file, content);
+                    res.writeHead(500, {"Content-Type" : "text/plain"});
+                    res.end("An unexpected server error occurred while saving your paste. Sorry ¯\_(ツ)_/¯")
+                }else {
+                    console.log("Paste " + id + " was created successfully. (at " + file + ")");
+                    res.writeHead(301, {"Location" : "/p/" + id});
+                    bucket.upload(file, function() {
+                        res.end();
+                    });
+                    res.end();
+                    setTimeout(function(){
+                        fs.unlink(file, function(err) {
+                            console.log("Deleted " + file + err);
+                        });
+                    }, 1000);
+                }
             });
-            setTimeout(function(){
-                fs.unlink(file, function(err) {
-                    console.log("Deleted " + file + err);
-                });
-            }, 1000);
         }
-    });
+    }));
 });
 
 /*
