@@ -8,10 +8,10 @@ if(!key) {
 }
 
 if(key) {
-    console.log(key, content.textContent);
     decryptedContent = sjcl.decrypt(key, content.textContent);
     content.textContent = decryptedContent;
 }else {
     content.textContent = "Decryption failed. Key missing";
 }
 
+hljs.highlightBlock(content);

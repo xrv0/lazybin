@@ -31,7 +31,7 @@ app.post("/paste_publish", function(req, res) {
                 }
             });
         }else {
-            console.log("An error occured while creating/writing to paste file (paste with same id already exists)", err, file, content);
+            console.log("An error occurred while creating/writing to paste file (paste with same id already exists)", err, file, content);
             res.writeHead(500, {"Content-Type" : "text/plain"});
             res.end("An unexpected server error occurred while saving your paste. Sorry ¯\_(ツ)_/¯ (id already exists)")
         }
