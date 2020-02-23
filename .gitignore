@@ -4,3 +4,4 @@ pastes/
 *.xml
 *.iml
 *.code-workspace
+node_modules/
