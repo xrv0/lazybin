@@ -5,3 +5,4 @@ pastes/
 *.iml
 *.code-workspace
 node_modules/
+node_modules/*
