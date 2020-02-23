@@ -2,6 +2,7 @@
   "name": "lazybin",
   "version": "1.0.0",
   "dependencies": {
+    "@google-cloud/storage": "^4.3.1",
     "body-parser": "latest",
     "express": "latest"
   }
