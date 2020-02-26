@@ -7,7 +7,7 @@ const app = express();
 const idLength = 4;
 const pasteDir = "./pastes/";
 
-app.use(bodyParser.urlencoded({extended: true })); 
+app.use(bodyParser.urlencoded({extended: true }));
 app.use(express.static(__dirname + '/public'));
 
 /*
