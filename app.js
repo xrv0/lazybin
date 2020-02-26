@@ -59,7 +59,7 @@ app.get("/p/*", function(req, res) {
 /*
 Generates a pseudo random ID with given length
  */
-function generateID(length) {
+function generateID(size) {
     let result = "";
     const characters = `abcdefghijklmnopqrstuvwxyz123456789`;
     for (let i = 0; i < length; i++) {
