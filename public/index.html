@@ -6,8 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>lazybin</title>
     <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="/styles/theme.css">
     <script src="/js/lib/sjcl.js"></script>
 </head>
+
 <body>
 <form action="/paste_publish" method="post" id="paste_form">
     <textarea name="paste_content" id="paste_content" cols="30" rows="10"></textarea>
@@ -16,7 +18,9 @@
         <button type="disabled" onclick="uploadPaste()">Publish</button>
         <button type="reset">New</button>
         <p>Key entropy:</p>
-        <input type="number" name="Key entropy" id="key-entropy" value="128">
+        <input type="number" name="key_entropy" id="key_entropy" value="128">
+        <p>Expiration Time(min):</p>
+        <input type="number" name="expiration_time" id="expiration_time" value="0">
     </div>
     <script src="/js/main.js"></script>
 </form>

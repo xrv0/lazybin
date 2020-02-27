@@ -3,7 +3,7 @@ const pasteForm = document.getElementById("paste_form");
 
 function uploadPaste() {
     const content = pasteTextarea.value;
-    const entropy = parseInt(document.getElementById("key-entropy").value);
+    const entropy = parseInt(document.getElementById("key_entropy").value);
 
     if(content.length > 0) {
         console.log("Generating AES Key...");

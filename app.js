@@ -7,8 +7,9 @@ const app = express();
 const idLength = 4;
 const pasteDir = "./pastes/";
 
-app.use(bodyParser.urlencoded({extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
+app.use("/notfound", express.static(__dirname + "/public/notfound.html"));
 
 /*
 Handles post requests for saving pastes
@@ -17,21 +18,30 @@ app.post("/paste_publish", publishPaste);
 
 function publishPaste(req, res) {
     let id = generateID(idLength);
-    let content = req.body.paste_content;
     let file = pasteDir + id;
+    let expirationDate;
+
+    if(req.body.expiration_time !== 0) {
+        expirationDate = new Date(new Date().getTime() + req.body.expiration_time * 60000);
+    }
+
+    let paste = {
+        content: req.body.paste_content,
+        expirationDate: expirationDate.getTime()
+    };
 
     fs.access(file, fs.constants.F_OK, (err => {
         if(err) {
-            fs.appendFile(file, content, function (err) {
+            fs.appendFile(file, JSON.stringify(paste), function (err) {
                 if (err) {
                     console.log("An error occurred while creating/writing to paste file", err, file, content);
                     res.writeHead(500, {"Content-Type" : "text/plain"});
-                    res.end("An unexpected server error occurred while saving your paste. Sorry ¯\_(ツ)_/¯")
+                    res.write("An unexpected server error occurred while saving your paste.")
                 }else {
                     console.log("Paste " + id + " was created successfully. (at " + file + ")");
                     res.writeHead(301, {"Location" : "/p/" + id});
-                    res.end();
                 }
+                res.end();
             });
         }else {
             publishPaste(req, res);
@@ -44,22 +54,34 @@ Inserts the text into the paste template
 */
 app.get("/p/*", function(req, res) {
     const id = req.url.slice(3);
-    fs.readFile(pasteDir + id, function(error, pasteContent) {
-        if(error) {
-            console.log(error);
-            res.send("this paste does not seem to exist")
-        }else {
-            fs.readFile("./template/paste.html", function (error, content) {
-                res.send(content.toString().replace("$id", id).replace("$paste_content", pasteContent.toString()))
-            })
+
+    fs.readFile(pasteDir + id, function(error, data) {
+        if(!error) {
+            const parsedPaste = JSON.parse(data);
+
+            const pasteContent = parsedPaste.content;
+            const expirationDate = new Date(parsedPaste.expirationDate);
+
+            if(expirationDate.getTime() > new Date().getTime()) {
+                fs.readFile("./template/paste.html", function (error, content) {
+                    res.send(content.toString().replace("$id", id).replace("$paste_content", pasteContent.toString()))
+                });
+                return;
+            }else {
+                fs.unlink(pasteDir + id, () => {
+                    console.log("Deleted out of date paste " + id + " Expiration Date: " + expirationDate + " Curr Date: " + new Date());
+                });
+            }
         }
+        res.writeHead(301, {"Location" : "/notfound"});
+        res.end();
     })
 });
 
 /*
 Generates a pseudo random ID with given length
  */
-function generateID(size) {
+function generateID(length) {
     let result = "";
     const characters = `abcdefghijklmnopqrstuvwxyz123456789`;
     for (let i = 0; i < length; i++) {
