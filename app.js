@@ -19,15 +19,16 @@ app.post("/paste_publish", publishPaste);
 function publishPaste(req, res) {
     let id = generateID(idLength);
     let file = pasteDir + id;
-    let expirationDate;
+    let expirationDate = "never";
 
-    if(req.body.expiration_time !== 0) {
-        expirationDate = new Date(new Date().getTime() + req.body.expiration_time * 60000);
+    if(req.body.expiration_time != 0) {
+        expirationDate = new Date(new Date().getTime() + req.body.expiration_time * 60000).getTime();
     }
 
     let paste = {
         content: req.body.paste_content,
-        expirationDate: expirationDate.getTime()
+        expirationDate: expirationDate,
+        id: id
     };
 
     fs.access(file, fs.constants.F_OK, (err => {
@@ -58,11 +59,10 @@ app.get("/p/*", function(req, res) {
     fs.readFile(pasteDir + id, function(error, data) {
         if(!error) {
             const parsedPaste = JSON.parse(data);
-
             const pasteContent = parsedPaste.content;
             const expirationDate = new Date(parsedPaste.expirationDate);
 
-            if(expirationDate.getTime() > new Date().getTime()) {
+            if(isNaN(expirationDate.getTime()) || expirationDate.getTime() > new Date().getTime()) {
                 fs.readFile("./template/paste.html", function (error, content) {
                     res.send(content.toString().replace("$id", id).replace("$paste_content", pasteContent.toString()))
                 });
