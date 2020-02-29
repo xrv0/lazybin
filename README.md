@@ -9,7 +9,7 @@
   </a>
 </p>
 
-> encrypted pastebin for lazy people (-, - )…zzzZZZ
+> a minimalistic AES-256 encrypted databaseless pastebin supporting code highlighting (-, - )…zzzZZZ
 
 ### 🏠 [Homepage / Demo](https://lazybin-269011.appspot.com)
 
