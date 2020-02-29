@@ -14,4 +14,4 @@ if(key) {
     content.textContent = "Decryption failed. Key missing";
 }
 
-hljs.highlightBlock(content);
+hljs.initHighlighting();

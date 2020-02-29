@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="/styles/theme.css">
     <script src="/js/lib/sjcl.js"></script>
+    <script defer src="/js/main.js"></script>
 </head>
 
 <body>
@@ -21,8 +22,10 @@
         <input type="number" name="key_entropy" id="key_entropy" value="128">
         <p>Expiration Time(min):</p>
         <input type="number" name="expiration_time" id="expiration_time" value="0">
+        <br>
+        <label for="enable_highlighting">Code highlighting</label>
+        <input type="checkbox" name="enable_highlighting" id="enable_highlighting" checked="true">
     </div>
-    <script src="/js/main.js"></script>
 </form>
 <footer id="footer">
     <a href="https://github.com/xrv0/lazybin">This project is open source! View it on github</a>
