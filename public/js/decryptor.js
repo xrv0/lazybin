@@ -1,4 +1,7 @@
-const content = document.getElementById("content");
+const contentDiv = document.getElementById("content");
+const enableHighlighting = contentDiv.textContent.split("$")[0];
+const content = contentDiv.textContent.split("$")[1];
+
 let key = document.documentURI.split("#")[1];
 
 if(!key) {
@@ -8,10 +11,11 @@ if(!key) {
 }
 
 if(key) {
-    decryptedContent = sjcl.decrypt(key, content.textContent);
-    content.textContent = decryptedContent;
+    contentDiv.textContent = sjcl.decrypt(key, content);
 }else {
-    content.textContent = "Decryption failed. Key missing";
+    contentDiv.textContent = "Decryption failed. Key missing";
 }
 
-hljs.initHighlighting();
+if(enableHighlighting.endsWith("true")) {
+    hljs.highlightBlock(document.getElementById("content"));
+}
