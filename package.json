@@ -4,6 +4,7 @@
   "dependencies": {
     "@google-cloud/storage": "^4.3.1",
     "body-parser": "latest",
+    "escape-html": "^1.0.3",
     "express": "latest"
   }
 }
