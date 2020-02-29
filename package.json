@@ -6,5 +6,8 @@
     "body-parser": "latest",
     "escape-html": "^1.0.3",
     "express": "latest"
+  },
+  "scripts": {
+    "start": "node lib/app_gcloud.js"
   }
 }
