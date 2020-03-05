@@ -5,7 +5,9 @@
 pastes/*
 pastes/
 
+# IntelliJ
 .idea
+*.code-workspace
 
 # Logs
 logs
