@@ -15,4 +15,5 @@ textarea#paste_content {
     background-color: #000e13;
     color: white;
     padding: 5px;
+    white-space: pre-line;
 }

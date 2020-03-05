@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name=lazybin is a minimalistic AES-256 encrypted databaseless pastebin supporting code highlighting>
     <title>lazybin</title>
-    <link rel="stylesheet" href="/styles/style.css">
-    <link rel="stylesheet" href="/styles/theme.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.8/sjcl.min.js"></script>
-    <script defer src="/js/main.js"></script>
+    <link defer rel="stylesheet" href="/styles/style.css">
+    <link defer rel="stylesheet" href="/styles/theme.css">
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.8/sjcl.min.js"></script>
+    <script defer async src="/js/main.js"></script>
     <link rel="shortcut icon" type="image/x-icon" href="/logo.ico">
 </head>
 
 <body>
+
 <form action="/paste_publish" method="post" id="paste_form">
     <textarea name="paste_content" id="paste_content" cols="30" rows="10"></textarea>
     <div id="menu">

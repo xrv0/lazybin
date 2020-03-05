@@ -11,7 +11,7 @@ if(!key) {
 }
 
 if(key) {
-    contentDiv.textContent = sjcl.decrypt(key, content);
+    contentDiv.innerText = sjcl.decrypt(key, content);
 }else {
     contentDiv.textContent = "Decryption failed. Key missing";
 }
