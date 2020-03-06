@@ -1,19 +1,24 @@
 div#menu {
     border: 1px solid black;
-    background-color: grey;
+    background-color: #000e13;
     position: fixed;
+    text-align: center;
+    color: white;
+
     top: 10px;
     right: 10px;
-    padding: 10px;
     margin-left: 10px;
-    text-align: center;
+    padding: 10px;
 }
 
 textarea#paste_content {
+    border: 1px solid black;
+    border: none;
+    outline: none;
     resize: none;
     width: 80%;
+    height: 80%;
+    padding: 10px;
     background-color: #000e13;
     color: white;
-    padding: 5px;
-    white-space: pre-line;
 }
