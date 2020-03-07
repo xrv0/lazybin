@@ -12,6 +12,11 @@ div#menu {
 textarea#paste_content {
     resize: none;
     width: 80%;
+<<<<<<< HEAD
+=======
+    height: 80%;
+    padding: 10px;
+>>>>>>> parent of ad577ab... Update index.html
     background-color: #000e13;
     color: white;
     padding: 5px;
