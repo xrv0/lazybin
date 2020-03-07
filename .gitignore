@@ -1,5 +1,6 @@
 .DS_Store
 pastes/*
+pastes/
 *.xml
 *.iml
 *.code-workspace
