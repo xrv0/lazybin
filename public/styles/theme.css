@@ -2,14 +2,15 @@ body {
     background-color: #002b36;
     color: #000e13;
     font-family: monospace;
+    font-size: 14px;
 }
 
 #footer {
     background-color: #000e13;
-    position: absolute;
+    position: fixed;
+    padding: .6em;
     bottom: 0;
-    width: 100%;
+    left: 0;
+    right: 0;
     text-align: center;
-    vertical-align: middle;
-    padding: 8px;
 }
