@@ -2,19 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name=lazybin is a minimalistic AES-256 encrypted databaseless pastebin supporting code highlighting>
-    <title>lazybin</title>
-    <link defer rel="stylesheet" href="/styles/style.css">
-    <link defer rel="stylesheet" href="/styles/theme.css">
+    <meta name="author" content="xrv0">
+    <meta name="description" content="AES-256 encrypted pastebin for sharing code snippets">
+    <meta name="keywords" content="lazybin, share code snippets, codepen alternative, pastebin alternative for code, hastebin alternative, encrypted pastebin, secure pastebin, private pastebin, encrypted hastebin, encrypted codepen">
+
+    <title>Create paste / lazybin</title>
+    <link async rel="stylesheet" href="/styles/style.css">
+    <link async rel="stylesheet" href="/styles/theme.css">
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.8/sjcl.min.js"></script>
-    <script defer async src="/js/main.js"></script>
-    <link rel="shortcut icon" type="image/x-icon" href="/logo.ico">
+    <script defer src="/js/main.js"></script>
 </head>
+
 <body>
 <form action="/paste_publish" method="post" id="paste_form">
-    <textarea name="paste_content" id="paste_content" spellcheck="false" rows="30"></textarea>
+    <textarea name="paste_content" id="paste_content" cols="30" rows="10"></textarea>
     <div id="menu">
         <h1>lazybin</h1>
         <button type="disabled" onclick="uploadPaste()">Publish</button>
@@ -29,7 +30,6 @@
     </div>
 </form>
 <footer id="footer">
-    <a href="https://github.com/xrv0/lazybin">Github</a> <a href="https://twitter.com/lazybin0">Twitter</a> <a href="https://www.buymeacoffee.com/lazybin">Donate</a>
-</footer>
+    <a href="https://github.com/xrv0/lazybin">Github</a> <a href="https://twitter.com/lazybinwtf">Twitter</a> <a href="https://www.buymeacoffee.com/lazybin">Donate</a></footer>
 </body>
 </html>

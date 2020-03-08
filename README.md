@@ -28,8 +28,6 @@ Contributions, issues and feature requests are welcome!<br />Feel free to check 
 
 Give a ⭐️ if this project helped you!
 
-[![Buy Me A Coffee](https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png)](https://www.buymeacoffee.com/lazybin)
-
 Donate Bitcoin: 1FVGKsksRt5DJ87tj1v3UEDivPphLze7Ea
 
 Donate Ether: 0xC3cF8CDb45C03557a1ade85a41657cddB2A5Fc21
