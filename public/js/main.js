@@ -1,5 +1,6 @@
 const pasteTextarea = document.getElementById("paste_content");
 const pasteForm = document.getElementById("paste_form");
+const extendedSettings = document.getElementById("content_extended_settings");
 
 function uploadPaste() {
     const content = pasteTextarea.value;
@@ -12,6 +13,14 @@ function uploadPaste() {
         pasteTextarea.value = encryptedContent;
         localStorage.setItem("lastKey", key);
         pasteForm.submit();
+    }
+}
+
+function toggleSettings() {
+    if(extendedSettings.style.display == 'none' || extendedSettings.style.display == ''){
+        extendedSettings.style.display = 'block';
+    }else{
+        extendedSettings.style.display = 'none';
     }
 }
 

@@ -1,16 +1,75 @@
 body {
     background-color: #002b36;
-    color: #000e13;
-    font-family: Tahoma;
-    font-size: 14px;
+    color: white;
+    font-family: Montserrat;
+    font-size: 20px;
+    background: rgb(250,135,0);
+    background: linear-gradient(90deg, rgba(250,135,0,1) 0%, rgba(234,76,9,1) 100%);
+    text-align: center;
+}
+
+.header {
+    position: static;
+    margin: 20px;
+    overflow: hidden;
+    font-size: 24px;
+}
+
+.header .left{
+    float: left;
+}
+
+.header .right{
+    float: right;
+}
+
+.header a:link,
+.header a:visited,
+.header a:hover,
+.header a:active {
+    color: white;
 }
 
 #footer {
-    background-color: #000e13;
     position: fixed;
     padding: .6em;
     bottom: 0;
     left: 0;
     right: 0;
-    text-align: center;
+    color: white;
+    background-color: white;
+}
+
+#footer a:link,
+#footer a:visited,
+#footer a:hover,
+#footer a:active {
+    color:#FE520A;
+}
+
+button {
+    position: relative;
+    margin: 12px;
+}
+
+button.normal {
+    transition: all 0.2s;
+    background: #FFFFFF;
+    border: 1px solid #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 28px;
+    height: 56px;
+    padding: 0 48px;
+    font-weight: 600;
+    color: #FE520A;
+    cursor: pointer;
+    line-height: 28px;
+}
+
+button.minimalistic {
+    background: none;
+    border: none;
+    color: #262626;
+    font-size: 13px;
+    text-decoration: underline;
 }
