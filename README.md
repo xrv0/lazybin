@@ -4,8 +4,8 @@
   <a href="https://www.gnu.org/licenses/gpl-3.0" target="_blank">
     <img alt="License: GNU General Public License" src="https://img.shields.io/badge/License-GNU General Public License-yellow.svg" />
   </a>
-  <a href="https://twitter.com/xrvzero" target="_blank">
-    <img alt="Twitter: xrvzero" src="https://img.shields.io/twitter/follow/xrvzero.svg?style=social" />
+  <a href="https://twitter.com/lazybinwtf" target="_blank">
+    <img alt="Twitter: xrvzero" src="https://img.shields.io/twitter/follow/lazybinwtf.svg?style=social" />
   </a>
 </p>
 
