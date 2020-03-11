@@ -1,14 +1,8 @@
 #paste_content {
-    outline: none;
-    border: none;
-    background: white;
     box-shadow: 4px 8px 20px rgba(215, 74, 9, 0.4);
     border-radius: 12px;
     min-height: 240px;
-    padding: 28px;
     max-width: 90%;
     color: black;
-    text-align: left;
-    margin: 0 auto 15px;
+    margin: 35px auto;
 }
-

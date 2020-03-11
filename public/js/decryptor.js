@@ -1,21 +1,34 @@
-const contentTextarea = document.getElementById("paste_content");
-const enableHighlighting = contentTextarea.textContent.split("$")[0];
-const content = contentTextarea.textContent.split("$")[1];
+const contentDiv = document.getElementById("paste_content");
+const id = document.location.pathname.split("/")[2];
+const key = document.location.hash.substring(1);
 
-let key = document.documentURI.split("#")[1];
+document.title = document.title.replace("$id", id);
 
-if(!key) {
-    key = localStorage.getItem("lastKey");
-    localStorage.removeItem("lastKey");
-    document.location.hash = key;
+try {
+    fetch("/fetch/" + id).then((response) => {
+        if(response.status === 200) {
+            return response.json();
+        }else if(response.status === 404) {
+            document.location.href = "/notfound";
+        }else {
+            document.location.href = "/error";
+        }
+        document.location.hash = "";
+    }).then((data) => {
+        contentDiv.innerText = escapeHtml(sjcl.decrypt(key, data["content"]));
+        if(data["highlighting"]) {
+            hljs.highlightBlock(contentDiv);
+        }
+    });
+}catch (e) {
+    contentDiv.innerText = "Decryption failed!";
 }
 
-if(key) {
-    contentTextarea.textContent = sjcl.decrypt(key, content);
-}else {
-    contentTextarea.textContent = "Decryption failed. Key missing";
-}
-
-if(enableHighlighting.endsWith("true")) {
-    hljs.initHighlighting();
+function escapeHtml(unsafe) {
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 }
