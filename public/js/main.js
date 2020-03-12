@@ -5,7 +5,7 @@ function uploadPaste() {
     const content = pasteTextarea.value;
 
     if(content.length > 0) {
-        const key = sjcl.codec.base64.fromBits(sjcl.random.randomWords(8));
+        const key = sjcl.codec.base64.fromBits(sjcl.random.randomWords(5));
         const encryptedContent = sjcl.encrypt(key, content);
 
         fetch("/paste_publish", {
