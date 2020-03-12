@@ -15,20 +15,11 @@ try {
         }
         document.location.hash = "";
     }).then((data) => {
-        contentDiv.innerText = escapeHtml(sjcl.decrypt(key, data["content"]));
+        contentDiv.innerText = sjcl.decrypt(key, data["content"]);
         if(data["highlighting"]) {
             hljs.highlightBlock(contentDiv);
         }
     });
 }catch (e) {
     contentDiv.innerText = "Decryption failed!";
-}
-
-function escapeHtml(unsafe) {
-    return unsafe
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
 }
