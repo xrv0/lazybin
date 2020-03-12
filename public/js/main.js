@@ -3,10 +3,9 @@ const extendedSettings = document.getElementById("content_extended_settings");
 
 function uploadPaste() {
     const content = pasteTextarea.value;
-    const entropy = document.getElementById("key_entropy").value;
 
     if(content.length > 0) {
-        const key = generateKey(entropy);
+        const key = sjcl.codec.base64.fromBits(sjcl.random.randomWords(8));
         const encryptedContent = sjcl.encrypt(key, content);
 
         fetch("/paste_publish", {
@@ -36,13 +35,4 @@ function toggleSettings() {
     }else{
         extendedSettings.style.display = 'none';
     }
-}
-
-/*
-Generates a pseudo random key for encryption
- */
-function generateKey(entropy) {
-    entropy = Math.ceil(entropy / 6) * 6; /* non-6-multiple produces same-length base64 */
-    let key = sjcl.bitArray.clamp(sjcl.random.randomWords(Math.ceil(entropy / 32), 0), entropy);
-    return sjcl.codec.base64.fromBits(key, 0).replace(/\=+$/, '').replace(/\//, '-');
 }
