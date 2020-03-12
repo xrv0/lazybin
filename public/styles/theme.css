@@ -12,13 +12,14 @@ body {
     outline: none;
     border: none;
     background: white;
-    transition: box-shadow .3s;
+    transition: all .2s ease-in-out;
     text-align: left;
     padding: 28px;
 }
 
 #paste_content:hover {
     box-shadow: 8px 12px 24px rgba(47, 47, 47, 0.4);
+    transform: scale(1.005);
 }
 
 .header {
@@ -89,7 +90,7 @@ button.normal:hover {
 button.minimalistic {
     background: none;
     border: none;
-    color: #262626;
-    font-size: 13px;
+    color: white;
+    font-size: 14px;
     text-decoration: underline;
 }
