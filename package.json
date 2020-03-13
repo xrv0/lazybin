@@ -4,7 +4,8 @@
   "dependencies": {
     "@google-cloud/storage": "^4.3.1",
     "body-parser": "latest",
-    "express": "latest"
+    "express": "latest",
+    "helmet": "^3.21.3"
   },
   "scripts": {
     "start": "node lib/app_gcloud.js"
