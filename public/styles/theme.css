@@ -1,19 +1,22 @@
 body {
+    font-size: 16px;
+    text-align: center;
+    font-family: Montserrat;
+
     background-color: #002b36;
     color: white;
-    font-family: Montserrat;
-    font-size: 20px;
     background: rgb(250,135,0);
     background: linear-gradient(90deg, rgba(250,135,0,1) 0%, rgba(234,76,9,1) 100%);
-    text-align: center;
+}
+
+main {
+    margin-bottom: 2.5rem;
 }
 
 #paste_content {
-    outline: none;
     border: none;
     background: white;
-    transition: all .2s ease-in-out;
-    text-align: left;
+    transition: all .2s linear;
     padding: 28px;
 }
 
@@ -37,20 +40,19 @@ header .right{
     float: right;
 }
 
-header a:link,
-header a:visited,
-header a:hover,
-header a:active {
+a:link,
+a:visited,
+a:hover,
+a:active {
     color: white;
 }
 
 footer {
     position: fixed;
-    padding: .6em;
+    padding: .6rem;
     bottom: 0;
     left: 0;
     right: 0;
-    color: white;
     background-color: white;
 }
 
