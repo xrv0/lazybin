@@ -19,7 +19,6 @@ function uploadPaste() {
                 highlighting: document.getElementById("enable_highlighting").checked
             })
         }).then((response) => {
-            console.log(response);
             if(response.status == 201) {
                 document.location.href = response.headers.get("Location") + "#" + key;
             }else if(response.status >= 400) {
