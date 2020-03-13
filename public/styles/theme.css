@@ -22,29 +22,29 @@ body {
     transform: scale(1.005);
 }
 
-.header {
+header {
     position: static;
     margin: 20px;
     overflow: hidden;
     font-size: 24px;
 }
 
-.header .left{
+header .left{
     float: left;
 }
 
-.header .right{
+header .right{
     float: right;
 }
 
-.header a:link,
-.header a:visited,
-.header a:hover,
-.header a:active {
+header a:link,
+header a:visited,
+header a:hover,
+header a:active {
     color: white;
 }
 
-#footer {
+footer {
     position: fixed;
     padding: .6em;
     bottom: 0;
@@ -54,10 +54,10 @@ body {
     background-color: white;
 }
 
-#footer a:link,
-#footer a:visited,
-#footer a:hover,
-#footer a:active {
+footer a:link,
+footer a:visited,
+footer a:hover,
+footer a:active {
     color:#FE520A;
 }
 
