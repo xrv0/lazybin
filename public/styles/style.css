@@ -8,7 +8,7 @@
 }
 
 #content_extended_settings {
-    margin: 17px 15px 15px;
+    padding: 10px;
     display: none;
 }
 
@@ -23,4 +23,12 @@
 
 #description-heading {
     margin-bottom: 0px;
+}
+
+@media only screen and (max-device-width: 1000px)
+{
+    #description-extended {
+        display: none;
+        color: red;
+    }
 }
