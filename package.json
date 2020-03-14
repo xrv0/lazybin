@@ -2,10 +2,10 @@
   "name": "lazybin",
   "version": "1.0.0",
   "dependencies": {
-    "@google-cloud/storage": "^4.3.1",
+    "@google-cloud/storage": "latest",
     "body-parser": "latest",
     "express": "latest",
-    "helmet": "^3.21.3"
+    "helmet": "latest"
   },
   "scripts": {
     "start": "node lib/app_gcloud.js"
