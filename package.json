@@ -9,6 +9,5 @@
   },
   "scripts": {
     "start": "node lib/app_gcloud.js"
-  },
-  "devDependencies": {}
+  }
 }
