@@ -18,6 +18,7 @@ main {
     background: white;
     transition: all .2s linear;
     padding: 28px;
+    text-align: left;
 }
 
 #paste_content:hover {
