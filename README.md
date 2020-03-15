@@ -4,7 +4,7 @@
   <a href="https://www.gnu.org/licenses/gpl-3.0" target="_blank">
     <img alt="License: GNU General Public License" src="https://img.shields.io/badge/License-GNU General Public License-yellow.svg" />
   </a>
-  <a href="https://twi
+
 # lazybin
 
 > lazybin is a minimialistic encrypted privacy focused pastebin for sharing code and text snippets.
@@ -47,8 +47,6 @@ sh appengine_deploy.sh
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 Feel free to check [issues page](https://github.com/xrv0/lazybin/issues).
-
-> a minimalistic AES-256 encrypted databaseless pastebin supporting code highlighting (-, - )…zzzZZZ
 
 ## Author
 
