@@ -1,11 +1,17 @@
 const pasteTextarea = document.getElementById("paste_content");
 const extendedSettings = document.getElementById("content_extended_settings");
+const customKeyInput = document.getElementById("custom_key");
 
 function uploadPaste() {
     const content = pasteTextarea.value;
 
     if(content.length > 0) {
-        const key = sjcl.codec.base64.fromBits(sjcl.random.randomWords(5));
+        let key;
+        if(customKeyInput.value.trim().length > 0) {
+            key = customKeyInput.value;
+        }else {
+            key = sjcl.codec.base64.fromBits(sjcl.random.randomWords(5));
+        }
         const encryptedContent = sjcl.encrypt(key, content);
 
         if(new Blob([encryptedContent]).size < 600 * 1000) {

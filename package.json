@@ -8,6 +8,7 @@
     "helmet": "latest"
   },
   "scripts": {
-    "start": "node lib/app_gcloud.js"
+    "start": "node lib/app_gcloud.js",
+    "start-normal": "node lib/app.js"
   }
 }
