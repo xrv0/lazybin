@@ -17,8 +17,9 @@ Use the following commands to self-host your own version of lazybin on your serv
 
 ```bash
 git clone https://github.com/xrv0/lazybin
+cd lazybin
 npm i
-npm run start-normal
+npm start
 ```
 
 ## Installation on GCloud App Engine
